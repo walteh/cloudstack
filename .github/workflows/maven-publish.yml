@@ -25,7 +25,7 @@ jobs:
 
     - name: publish to maven
       run: |
-        mvn --batch-mode install -pl cloud-utils,cloud-framework-db,cloud-framework-config,cloud-framework-ca,cloud-framework-direct-download
-        mvn --batch-mode deploy -pl cloud-api
+        mvn --batch-mode install -pl utils,framework,api
+        mvn --batch-mode deploy -pl api
       env:
         GITHUB_TOKEN: ${{ github.token }}
