@@ -5,6 +5,9 @@ name: publish-maven-package-api
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -25,7 +28,7 @@ jobs:
 
     - name: publish to maven
       run: |
-        mvn --batch-mode install -pl utils,framework,api
+        mvn --batch-mode install
         mvn --batch-mode deploy -pl api
       env:
         GITHUB_TOKEN: ${{ github.token }}
