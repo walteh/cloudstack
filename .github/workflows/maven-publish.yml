@@ -22,7 +22,10 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
+
     - name: publish to maven
-      run: mvn --batch-mode deploy -pl api
+      run: |
+        mvn --batch-mode install -pl cloud-utils,cloud-framework-db,cloud-framework-config,cloud-framework-ca,cloud-framework-direct-download
+        mvn --batch-mode deploy -pl cloud-api
       env:
         GITHUB_TOKEN: ${{ github.token }}
