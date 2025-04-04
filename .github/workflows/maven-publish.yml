@@ -36,12 +36,16 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-m2-
 
-    - name: Build with Maven
-      run: |
+    - name: install dependencies
+      run: | #bash
         mvn --batch-mode dependency:go-offline
-        mvn --batch-mode install -DskipTests -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -T 2C
 
-    - name: publish to maven
-      run: mvn --batch-mode deploy -pl api
+    - name: build framework modules
+      run: | #bash
+        mvn -Pdeveloper -Dsimulator -DskipTests clean install  -pl api
+
+    - name: deploy api module
+      run: | #bash
+        mvn -Pdeveloper -Dsimulator -DskipTests deploy -pl api
       env:
         GITHUB_TOKEN: ${{ github.token }}
