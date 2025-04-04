@@ -36,10 +36,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-m2-
 
-    - name: install dependencies
-      run: | #bash
-        mvn --batch-mode dependency:go-offline
-
     - name: build framework modules
       run: | #bash
         mvn -Pdeveloper -Dsimulator -DskipTests clean install  -pl api
